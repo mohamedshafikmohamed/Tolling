@@ -15,7 +15,7 @@ namespace Tolling.Models
         
         [MaxLength(20, ErrorMessage = "UserName can't be longer than 20 characters")]
         public string UserName { get; set; }
-        [MaxLength(10, ErrorMessage = "Password can't be longer than 10 characters")]
+     
         [Required(ErrorMessage = "Password created is required")]
         
         public string Password { get; set; }

@@ -27,9 +27,9 @@ namespace Tolling.Controllers
             {
                 return Ok(_Iuser.GetUsers());
             }
-            catch
+            catch (Exception e)
             {
-                return BadRequest("error");
+                return BadRequest("Error : " + e.Message);
             }
         }
 
@@ -41,9 +41,9 @@ namespace Tolling.Controllers
             {
                 return Ok(_Iuser.GetUser(id));
             }
-            catch
+            catch (Exception e)
             {
-                return BadRequest("error");
+                return BadRequest("Error : " + e.Message);
             }
         }
 
@@ -53,17 +53,20 @@ namespace Tolling.Controllers
         {
             try
             {
+                
+                user.Password = _Iuser.MD5Hash(user.Password);
                 if (ModelState.IsValid)
                 {
+                    
                     _Iuser.Create(user);
                     return Ok("User Created successfully");
 
                 }
                 else return BadRequest("Some properties are not valid");
             }
-            catch
+            catch(Exception e)
             {
-                return BadRequest("error");
+                return BadRequest("Error : " + e.Message);
             }
         }
 
@@ -73,12 +76,12 @@ namespace Tolling.Controllers
         {
             try
             {
+                signIn.Password = _Iuser.MD5Hash(signIn.Password);
                 return Ok(_Iuser.SignIn(signIn));
-
             }
-            catch
+            catch (Exception e)
             {
-                return BadRequest("error");
+                return BadRequest("Error : " + e.Message);
             }
 
         }
@@ -92,9 +95,9 @@ namespace Tolling.Controllers
                 _Iuser.Update(user);
                 return Ok("User Updated");
             }
-            catch
+            catch (Exception e)
             {
-                return BadRequest("error");
+                return BadRequest("Error : " + e.Message);
             }
         }
 
@@ -107,9 +110,9 @@ namespace Tolling.Controllers
                 _Iuser.Delete(id);
                 return Ok("User Deleted");
             }
-            catch
+            catch (Exception e)
             {
-                return BadRequest("error");
+                return BadRequest("Error : " + e.Message);
             }
         }
     }

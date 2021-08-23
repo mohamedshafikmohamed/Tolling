@@ -14,5 +14,9 @@ namespace Tolling.Interfaces
         public User SignIn(SignIn signIn);
         public  void Update(User user);
         public  void Delete(int id);
+        public  string MD5Hash(string input);
+        
+           
+        
     }        
 }
