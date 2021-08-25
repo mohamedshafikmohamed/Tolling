@@ -35,7 +35,7 @@ namespace Tolling.Controllers
 
         // GET api/ToolController/5
         [HttpGet("{id}")]
-        public ActionResult<User> Get(int id)
+        public ActionResult<User> Get(string id)
         {
             try
             {
@@ -88,7 +88,7 @@ namespace Tolling.Controllers
 
         // DELETE api/<ToolController>/5
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string id)
         {
             try
             {

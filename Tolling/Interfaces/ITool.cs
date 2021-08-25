@@ -6,7 +6,8 @@ using Tolling.Models;
 
 namespace Tolling.Interfaces
 {
-  public  interface ITool:Crud<Tool,int>
+  public  interface ITool:Crud<Tool,string>
     {
+
     }
 }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Tolling.Data;
 
 namespace Tolling.Migrations
 {
     [DbContext(typeof(Dbcontext))]
-    partial class DbcontextModelSnapshot : ModelSnapshot
+    [Migration("20210825143427_EditModel4")]
+    partial class EditModel4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -201,6 +203,10 @@ namespace Tolling.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("SerialNumber")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("ToolSerialNumber")
                         .HasColumnType("nvarchar(10)");
 
                     b.Property<int>("UserId")
@@ -212,7 +218,7 @@ namespace Tolling.Migrations
 
                     b.HasIndex("LocationId");
 
-                    b.HasIndex("SerialNumber");
+                    b.HasIndex("ToolSerialNumber");
 
                     b.HasIndex("UserId");
 
@@ -234,6 +240,10 @@ namespace Tolling.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RoleName")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("RoleName1")
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("UserName")
@@ -243,7 +253,7 @@ namespace Tolling.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RoleName");
+                    b.HasIndex("RoleName1");
 
                     b.ToTable("Users");
                 });
@@ -323,7 +333,7 @@ namespace Tolling.Migrations
 
                     b.HasOne("Tolling.Models.Tool", "Tool")
                         .WithMany()
-                        .HasForeignKey("SerialNumber");
+                        .HasForeignKey("ToolSerialNumber");
 
                     b.HasOne("Tolling.Models.User", "User")
                         .WithMany()
@@ -344,7 +354,7 @@ namespace Tolling.Migrations
                 {
                     b.HasOne("Tolling.Models.Role", "Role")
                         .WithMany("User")
-                        .HasForeignKey("RoleName");
+                        .HasForeignKey("RoleName1");
 
                     b.Navigation("Role");
                 });

@@ -27,14 +27,14 @@ namespace Tolling.Repository
             _db.SaveChanges();
         }
 
-        public void Delete(int id)
+        public void Delete(string id)
         {
             var tool = _db.Tool.Find(id);
             _db.Tool.Remove(tool);
             _db.SaveChanges();
         }
 
-        public Tool GetOne(int id)
+        public Tool GetOne(string id)
         {
             return _db.Tool.Find(id);
         }

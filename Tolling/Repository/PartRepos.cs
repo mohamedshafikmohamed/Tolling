@@ -50,8 +50,9 @@ namespace Tolling.Repository
 
         public void AssignToTool(ToolPart Toolpart)
         {
-            _db.ToolPart.Add(Toolpart);
+           _db.ToolPart.Add(Toolpart);
             _db.SaveChanges();
         }
+    
     }
 }
