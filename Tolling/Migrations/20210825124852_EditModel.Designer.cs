@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Tolling.Data;
 
 namespace Tolling.Migrations
 {
     [DbContext(typeof(Dbcontext))]
-    partial class DbcontextModelSnapshot : ModelSnapshot
+    [Migration("20210825124852_EditModel")]
+    partial class EditModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -130,6 +132,9 @@ namespace Tolling.Migrations
                     b.Property<double>("Height")
                         .HasColumnType("float");
 
+                    b.Property<int>("LocationId")
+                        .HasColumnType("int");
+
                     b.Property<int>("NoOfCavities")
                         .HasColumnType("int");
 
@@ -148,6 +153,8 @@ namespace Tolling.Migrations
                         .HasColumnType("float");
 
                     b.HasKey("SerialNumber");
+
+                    b.HasIndex("LocationId");
 
                     b.ToTable("Tool");
                 });
@@ -273,6 +280,17 @@ namespace Tolling.Migrations
                     b.Navigation("Locker");
 
                     b.Navigation("Tool");
+                });
+
+            modelBuilder.Entity("Tolling.Models.Tool", b =>
+                {
+                    b.HasOne("Tolling.Models.Location", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Location");
                 });
 
             modelBuilder.Entity("Tolling.Models.ToolPart", b =>

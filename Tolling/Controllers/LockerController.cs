@@ -1,33 +1,30 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Tolling.Interfaces;
 using Tolling.Models;
-
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Tolling.Controllers
 {
-    [SwaggerTag("ggg")]
-       [Route("api/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class LockerController : ControllerBase
     {
-        private readonly IUser _Iuser;
-        public UserController(IUser Iuser)
+        private readonly ILocker _ILocker;
+        public LockerController(ILocker Ilocker)
         {
-            _Iuser = Iuser;
+            _ILocker = Ilocker;
         }
-        //GET: api/UserController
+        //GET: api/LockerController
         [HttpGet]
-        public ActionResult<IEnumerable<User>> Get()
+        public ActionResult<IEnumerable<Tool>> Get()
         {
             try
             {
-                return Ok(_Iuser.GetAll());
+                return Ok(_ILocker.GetAll());
             }
             catch (Exception e)
             {
@@ -35,13 +32,13 @@ namespace Tolling.Controllers
             }
         }
 
-        // GET api/UserController/5
+        // GET api/LockerController/5
         [HttpGet("{id}")]
-        public  ActionResult<User> Get(int id)
+        public ActionResult<User> Get(int id)
         {
             try
             {
-                return Ok(_Iuser.GetOne(id));
+                return Ok(_ILocker.GetOne(id));
             }
             catch (Exception e)
             {
@@ -49,53 +46,38 @@ namespace Tolling.Controllers
             }
         }
 
-        // POST api/UserController
+        // POST api/ILockerController
         [HttpPost]
-        public ActionResult Post([FromBody] User user)
+        public ActionResult Post([FromBody] Locker locker)
         {
             try
             {
-                
-                user.Password = _Iuser.MD5Hash(user.Password);
+
                 if (ModelState.IsValid)
                 {
-                    
-                    _Iuser.Create(user);
-                    return Ok("User Created successfully");
+
+                    _ILocker.Create(locker);
+                    return Ok("Item Created successfully");
 
                 }
                 else return BadRequest("Some properties are not valid");
             }
-            catch(Exception e)
-            {
-                return BadRequest("Error : " + e.Message);
-            }
-        }
-
-        [HttpGet]
-        [Route("SignIn")]
-        public ActionResult SignIn([FromBody]SignIn signIn)
-        {
-            try
-            {
-                signIn.Password = _Iuser.MD5Hash(signIn.Password);
-                return Ok(_Iuser.SignIn(signIn));
-            }
             catch (Exception e)
             {
                 return BadRequest("Error : " + e.Message);
             }
-
         }
 
-        // PUT api/<UserController>/5
+
+
+        // PUT api/<LockerController>/5
         [HttpPut()]
-        public ActionResult Put([FromBody] User user)
+        public ActionResult Put([FromBody] Locker locker)
         {
             try
             {
-                _Iuser.Update(user);
-                return Ok("User Updated");
+                _ILocker.Update(locker);
+                return Ok("Item Updated");
             }
             catch (Exception e)
             {
@@ -103,14 +85,14 @@ namespace Tolling.Controllers
             }
         }
 
-        // DELETE api/<UserController>/5
+        // DELETE api/<LockerController>/5
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
             try
             {
-                _Iuser.Delete(id);
-                return Ok("User Deleted");
+                _ILocker.Delete(id);
+                return Ok("Item Deleted");
             }
             catch (Exception e)
             {
@@ -119,3 +101,4 @@ namespace Tolling.Controllers
         }
     }
 }
+

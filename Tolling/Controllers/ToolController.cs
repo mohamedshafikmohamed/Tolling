@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,23 +10,22 @@ using Tolling.Models;
 
 namespace Tolling.Controllers
 {
-    [SwaggerTag("ggg")]
-       [Route("api/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class ToolController : ControllerBase
     {
-        private readonly IUser _Iuser;
-        public UserController(IUser Iuser)
+        private readonly ITool _ITool;
+        public ToolController(ITool ITool)
         {
-            _Iuser = Iuser;
+            _ITool = ITool;
         }
-        //GET: api/UserController
+        //GET: api/ToolController
         [HttpGet]
-        public ActionResult<IEnumerable<User>> Get()
+        public ActionResult<IEnumerable<Tool>> Get()
         {
             try
             {
-                return Ok(_Iuser.GetAll());
+                return Ok(_ITool.GetAll());
             }
             catch (Exception e)
             {
@@ -35,13 +33,13 @@ namespace Tolling.Controllers
             }
         }
 
-        // GET api/UserController/5
+        // GET api/ToolController/5
         [HttpGet("{id}")]
-        public  ActionResult<User> Get(int id)
+        public ActionResult<User> Get(int id)
         {
             try
             {
-                return Ok(_Iuser.GetOne(id));
+                return Ok(_ITool.GetOne(id));
             }
             catch (Exception e)
             {
@@ -49,53 +47,38 @@ namespace Tolling.Controllers
             }
         }
 
-        // POST api/UserController
+        // POST api/ToolController
         [HttpPost]
-        public ActionResult Post([FromBody] User user)
+        public ActionResult Post([FromBody] Tool tool)
         {
             try
             {
-                
-                user.Password = _Iuser.MD5Hash(user.Password);
+
                 if (ModelState.IsValid)
                 {
-                    
-                    _Iuser.Create(user);
-                    return Ok("User Created successfully");
+
+                    _ITool.Create(tool);
+                    return Ok("Item Created successfully");
 
                 }
                 else return BadRequest("Some properties are not valid");
             }
-            catch(Exception e)
-            {
-                return BadRequest("Error : " + e.Message);
-            }
-        }
-
-        [HttpGet]
-        [Route("SignIn")]
-        public ActionResult SignIn([FromBody]SignIn signIn)
-        {
-            try
-            {
-                signIn.Password = _Iuser.MD5Hash(signIn.Password);
-                return Ok(_Iuser.SignIn(signIn));
-            }
             catch (Exception e)
             {
                 return BadRequest("Error : " + e.Message);
             }
-
         }
 
-        // PUT api/<UserController>/5
+       
+
+        // PUT api/<ToolController>/5
         [HttpPut()]
-        public ActionResult Put([FromBody] User user)
+        public ActionResult Put([FromBody] Tool tool)
         {
             try
             {
-                _Iuser.Update(user);
-                return Ok("User Updated");
+                _ITool.Update(tool);
+                return Ok("Item Updated");
             }
             catch (Exception e)
             {
@@ -103,14 +86,14 @@ namespace Tolling.Controllers
             }
         }
 
-        // DELETE api/<UserController>/5
+        // DELETE api/<ToolController>/5
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
             try
             {
-                _Iuser.Delete(id);
-                return Ok("User Deleted");
+                _ITool.Delete(id);
+                return Ok("Item Deleted");
             }
             catch (Exception e)
             {

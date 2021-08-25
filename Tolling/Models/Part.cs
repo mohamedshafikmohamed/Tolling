@@ -15,7 +15,7 @@ namespace Tolling.Models
       
         [MaxLength(30, ErrorMessage = "Description can't be longer than 30 characters")]
         public string Description { get; set; }
-        public IList<Tool> ToolPart { get; set; }
+        public virtual IList<Tool> ToolPart { get; set; }
 
     }
 }

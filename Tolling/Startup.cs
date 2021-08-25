@@ -34,6 +34,12 @@ namespace Tolling
             services.AddDbContext<Dbcontext>(item => item.UseSqlServer
            (Configuration.GetConnectionString("Tollingdb")));
             services.AddScoped<IUser, UserRepos>();
+            services.AddScoped<IActionType, ActionTypeRepos>();
+            services.AddScoped<ILocation, LocationRepos>();
+            services.AddScoped<IPart, PartRepos>();
+            services.AddScoped<ITool, ToolRepos>();
+            services.AddScoped<ILocker, LockerRepos>();
+            services.AddScoped<ITooling_Movement_Log, Tooling_Movement_LogRepos>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Tolling", Version = "v1" });

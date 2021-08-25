@@ -13,7 +13,9 @@ namespace Tolling.Models
         public string PartNumber { get; set; }
         public Part Part { get; set; }
         [Key]
-        public int SerialNumber { get; set; }
+
+      /*  [MaxLength(10, ErrorMessage = "SerialNumber can't be longer than 10 characters")]
+        public string SerialNumber { get; set; }*/
         public Tool Tool { get; set; }
 
 

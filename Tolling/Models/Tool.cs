@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,7 +10,10 @@ namespace Tolling.Models
     public class Tool
     {
         [Key]
-        public int SerialNumber { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+
+        [MaxLength(10, ErrorMessage = "SerialNumber can't be longer than 10 characters")]
+        public string SerialNumber { get; set; }
 
         [Required(ErrorMessage = "ToolOwner  is required")]
 
@@ -21,9 +25,7 @@ namespace Tolling.Models
 
         public int NoOfCavities { get; set; }
         public DateTime ReciviedAt { get; set; }
-        public int LocationId { get; set; }
-        public Location Location { get; set; }
 
-        public IList<Part> ToolPart { get; set; }
+        public virtual IList<Part> ToolPart { get; set; }
     }
 }

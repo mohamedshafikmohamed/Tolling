@@ -21,6 +21,9 @@ namespace Tolling.Models
         public string Password { get; set; }
         [Required(ErrorMessage = "Admin created is required")]
         public bool Admin { get; set; }
+        [MaxLength(20, ErrorMessage = "RoleName can't be longer than 0 characters")]
+        public string RoleName { get; set; }
+        public Role Role { get; set; }
 
     }
 }

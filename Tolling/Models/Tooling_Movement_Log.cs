@@ -20,7 +20,9 @@ namespace Tolling.Models
         public ActionType ActionType { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
-        public int SerialNumber { get; set; }
+
+   /*     [MaxLength(10, ErrorMessage = "SerialNumber can't be longer than 10 characters")]
+        public string SerialNumber { get; set; }*/
         public Tool Tool { get; set; }
         public int LocationId { get; set; }
         public Location Location { get; set; }

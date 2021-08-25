@@ -35,12 +35,12 @@ namespace Tolling.Repository
              _db.SaveChanges();
         }
 
-        public  User GetUser(int id)
+        public  User GetOne(int id)
         {
             return  _db.Users.Find(id);
         }
 
-        public IEnumerable<User> GetUsers()
+        public IEnumerable<User> GetAll()
         {
             return  _db.Users.ToList();
         }

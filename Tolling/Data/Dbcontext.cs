@@ -28,7 +28,7 @@ namespace Tolling.Data
         public DbSet<ActionType> ActionType { get; set; }
         
         public DbSet<Part> Part { get; set; }
-        public DbSet<Tool> Tool { get; set; }
+      //  public DbSet<Tool> Tool { get; set; }
         public DbSet<Tooling_Movement_Log> Tooling_Movement_Log { get; set; }
         public DbSet<ToolPart> ToolPart { get; set; }
 

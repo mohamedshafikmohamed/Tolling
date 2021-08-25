@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,23 +10,23 @@ using Tolling.Models;
 
 namespace Tolling.Controllers
 {
-    [SwaggerTag("ggg")]
-       [Route("api/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class Tooling_Movement_LogController : ControllerBase
     {
-        private readonly IUser _Iuser;
-        public UserController(IUser Iuser)
+       
+        private readonly ITooling_Movement_Log _ITooling_Movement_Log;
+        public Tooling_Movement_LogController(ITooling_Movement_Log ITooling_Movement_log)
         {
-            _Iuser = Iuser;
+            _ITooling_Movement_Log = ITooling_Movement_log;
         }
-        //GET: api/UserController
+        //GET: api/Tooling_Movement_LogController
         [HttpGet]
-        public ActionResult<IEnumerable<User>> Get()
+        public ActionResult<IEnumerable<Tooling_Movement_Log>> Get()
         {
             try
             {
-                return Ok(_Iuser.GetAll());
+                return Ok(_ITooling_Movement_Log.GetAll());
             }
             catch (Exception e)
             {
@@ -35,13 +34,13 @@ namespace Tolling.Controllers
             }
         }
 
-        // GET api/UserController/5
+        // GET api/Tooling_Movement_LogController/5
         [HttpGet("{id}")]
-        public  ActionResult<User> Get(int id)
+        public ActionResult<Tooling_Movement_Log> Get(int id)
         {
             try
             {
-                return Ok(_Iuser.GetOne(id));
+                return Ok(_ITooling_Movement_Log.GetOne(id));
             }
             catch (Exception e)
             {
@@ -49,53 +48,38 @@ namespace Tolling.Controllers
             }
         }
 
-        // POST api/UserController
+        // POST api/Tooling_Movement_LogController
         [HttpPost]
-        public ActionResult Post([FromBody] User user)
+        public ActionResult Post([FromBody] Tooling_Movement_Log Tooling_Movement_log)
         {
             try
             {
-                
-                user.Password = _Iuser.MD5Hash(user.Password);
+
                 if (ModelState.IsValid)
                 {
-                    
-                    _Iuser.Create(user);
-                    return Ok("User Created successfully");
+
+                    _ITooling_Movement_Log.Create(Tooling_Movement_log);
+                    return Ok("Item Created successfully");
 
                 }
                 else return BadRequest("Some properties are not valid");
             }
-            catch(Exception e)
-            {
-                return BadRequest("Error : " + e.Message);
-            }
-        }
-
-        [HttpGet]
-        [Route("SignIn")]
-        public ActionResult SignIn([FromBody]SignIn signIn)
-        {
-            try
-            {
-                signIn.Password = _Iuser.MD5Hash(signIn.Password);
-                return Ok(_Iuser.SignIn(signIn));
-            }
             catch (Exception e)
             {
                 return BadRequest("Error : " + e.Message);
             }
-
         }
 
-        // PUT api/<UserController>/5
+
+
+        // PUT api/<Tooling_Movement_LogController>/5
         [HttpPut()]
-        public ActionResult Put([FromBody] User user)
+        public ActionResult Put([FromBody] Tooling_Movement_Log Tooling_Movement_log)
         {
             try
             {
-                _Iuser.Update(user);
-                return Ok("User Updated");
+                _ITooling_Movement_Log.Update(Tooling_Movement_log);
+                return Ok("Item Updated");
             }
             catch (Exception e)
             {
@@ -103,14 +87,14 @@ namespace Tolling.Controllers
             }
         }
 
-        // DELETE api/<UserController>/5
+        // DELETE api/<Tooling_Movement_LogController>/5
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
             try
             {
-                _Iuser.Delete(id);
-                return Ok("User Deleted");
+                _ITooling_Movement_Log.Delete(id);
+                return Ok("Item Deleted");
             }
             catch (Exception e)
             {
