@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,8 @@ using Tolling.Models;
 
 namespace Tolling.Controllers
 {
-    [Route("api/[controller]")]
+    [SwaggerTag("ggg")]
+       [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
