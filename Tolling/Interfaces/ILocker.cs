@@ -6,7 +6,7 @@ using Tolling.Models;
 
 namespace Tolling.Interfaces
 {
-    public interface ILocker : Crud<Locker, int>
+    public interface ILocker : CrudMToM<Locker, int,LocationDetails>
     {
     }
 }

@@ -10,22 +10,23 @@ using Tolling.Models;
 
 namespace Tolling.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
-    public class ActionTypeController : ControllerBase
+    //Tested
+    public class LocationsController : ControllerBase
     {
-        private readonly IActionType _IActionType;
-        public ActionTypeController(IActionType IActiontype)
+        private readonly ILocation _ILocation;
+        public LocationsController(ILocation ILocation)
         {
-            _IActionType = IActiontype;
+            _ILocation = ILocation;
         }
-        //GET: api/ActiontypeController
+        //GET: api/LocationController
         [HttpGet]
-        public ActionResult<IEnumerable<IActionType>> Get()
+        public ActionResult<IEnumerable<Location>> Get()
         {
             try
             {
-                return Ok(_IActionType.GetAll());
+                return Ok(_ILocation.GetAll());
             }
             catch (Exception e)
             {
@@ -33,13 +34,13 @@ namespace Tolling.Controllers
             }
         }
 
-        // GET api/ActionTypeController/5
+        // GET api/ToolController/5
         [HttpGet("{id}")]
-        public ActionResult<IActionType> Get(string id)
+        public ActionResult<Location> Get(int id)
         {
             try
             {
-                return Ok(_IActionType.GetOne(id));
+                return Ok(_ILocation.GetOne(id));
             }
             catch (Exception e)
             {
@@ -47,9 +48,9 @@ namespace Tolling.Controllers
             }
         }
 
-        // POST api/ActionTypeController
+        // POST api/LocationController
         [HttpPost]
-        public ActionResult Post([FromBody] ActionType Actiontype)
+        public ActionResult Post([FromBody] Location location)
         {
             try
             {
@@ -57,8 +58,8 @@ namespace Tolling.Controllers
                 if (ModelState.IsValid)
                 {
 
-                    _IActionType.Create(Actiontype);
-                    return Ok("Item Created successfully");
+                    _ILocation.Create(location);
+                    return Ok("Location Created successfully");
 
                 }
                 else return BadRequest("Some properties are not valid");
@@ -71,14 +72,14 @@ namespace Tolling.Controllers
 
 
 
-        // PUT api/<ActiontypeController>/5
+        // PUT api/<LocationController>/5
         [HttpPut()]
-        public ActionResult Put([FromBody] ActionType Actiontype)
+        public ActionResult Put([FromBody] Location location)
         {
             try
             {
-                _IActionType.Update(Actiontype);
-                return Ok("Item Updated");
+                _ILocation.Update(location);
+                return Ok("Location Updated");
             }
             catch (Exception e)
             {
@@ -86,14 +87,14 @@ namespace Tolling.Controllers
             }
         }
 
-        // DELETE api/<ActionTypeController>/5
+        // DELETE api/<LocationController>/5
         [HttpDelete("{id}")]
-        public ActionResult Delete(string id)
+        public ActionResult Delete(int id)
         {
             try
             {
-                _IActionType.Delete(id);
-                return Ok("Item Deleted");
+                _ILocation.Delete(id);
+                return Ok("Location Deleted");
             }
             catch (Exception e)
             {

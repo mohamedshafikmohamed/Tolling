@@ -10,7 +10,7 @@ using Tolling.Models;
 
 namespace Tolling.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class Tooling_Movement_LogController : ControllerBase
     {

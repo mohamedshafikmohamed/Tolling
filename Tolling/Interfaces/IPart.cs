@@ -6,9 +6,9 @@ using Tolling.Models;
 
 namespace Tolling.Interfaces
 {
-   public interface IPart:Crud<Part, string>
+   public interface IPart:CrudMToM<Part, string ,ToolPart>
     {
-        public void AssignToTool(ToolPart Toolpart);
+       
 
         
     }

@@ -14,16 +14,15 @@ namespace Tolling.Repository
         {
             _db = db;
         }
-        public void Create(Part part)
+        public void Create(Part part,ToolPart toolPart)
         {
             
 
 
             _db.Part.Add(part);
             _db.SaveChanges();
-            ToolPart tp = new ToolPart();
-            tp.PartNumber=part.PartNumber;
-            AssignToTool(tp);
+           
+            AssignMToM(toolPart);
         }
 
         public void Delete(string id)
@@ -42,13 +41,14 @@ namespace Tolling.Repository
         {
             return _db.Part.ToList();
         }
-        public void Update(Part part)
+        public void Update(Part part,ToolPart toolpart)
         {
             _db.Part.Update(part);
+            _db.ToolPart.Update(toolpart);
             _db.SaveChanges();
         }
 
-        public void AssignToTool(ToolPart Toolpart)
+        public void AssignMToM(ToolPart Toolpart)
         {
            _db.ToolPart.Add(Toolpart);
             _db.SaveChanges();

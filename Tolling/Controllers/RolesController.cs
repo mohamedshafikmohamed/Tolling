@@ -5,26 +5,28 @@ using System.Linq;
 using System.Threading.Tasks;
 using Tolling.Interfaces;
 using Tolling.Models;
+
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Tolling.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
-    public class LockerController : ControllerBase
+    //Tested
+    public class RolesController : ControllerBase
     {
-        private readonly ILocker _ILocker;
-        public LockerController(ILocker Ilocker)
+        private readonly IRole _IRole;
+        public RolesController(IRole iRole)
         {
-            _ILocker = Ilocker;
+            _IRole =iRole;
         }
-        //GET: api/LockerController
+        //GET: api/RoleController
         [HttpGet]
-        public ActionResult<IEnumerable<Tool>> Get()
+        public ActionResult<IEnumerable<Role>> Get()
         {
             try
             {
-                return Ok(_ILocker.GetAll());
+                return Ok(_IRole.GetAll());
             }
             catch (Exception e)
             {
@@ -32,13 +34,13 @@ namespace Tolling.Controllers
             }
         }
 
-        // GET api/LockerController/5
+        // GET api/RoleController/5
         [HttpGet("{id}")]
-        public ActionResult<User> Get(int id)
+        public ActionResult<Role> Get(string id)
         {
             try
             {
-                return Ok(_ILocker.GetOne(id));
+                return Ok(_IRole.GetOne(id));
             }
             catch (Exception e)
             {
@@ -46,9 +48,9 @@ namespace Tolling.Controllers
             }
         }
 
-        // POST api/ILockerController
+        // POST api/ToolController
         [HttpPost]
-        public ActionResult Post([FromBody] Locker locker)
+        public ActionResult Post([FromBody] Role role)
         {
             try
             {
@@ -56,8 +58,8 @@ namespace Tolling.Controllers
                 if (ModelState.IsValid)
                 {
 
-                    _ILocker.Create(locker);
-                    return Ok("Item Created successfully");
+                    _IRole.Create(role);
+                    return Ok("Role Created successfully");
 
                 }
                 else return BadRequest("Some properties are not valid");
@@ -69,30 +71,30 @@ namespace Tolling.Controllers
         }
 
 
-
-        // PUT api/<LockerController>/5
+/*
+        // PUT api/<RoleController>/5
         [HttpPut()]
-        public ActionResult Put([FromBody] Locker locker)
+        public ActionResult Put([FromBody] Role role)
         {
             try
             {
-                _ILocker.Update(locker);
-                return Ok("Item Updated");
+                _IRole.Update(role);
+                return Ok("Role Updated");
             }
             catch (Exception e)
             {
                 return BadRequest("Error : " + e.Message);
             }
         }
-
-        // DELETE api/<LockerController>/5
+*/
+        // DELETE api/<RoleController>/5
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string id)
         {
             try
             {
-                _ILocker.Delete(id);
-                return Ok("Item Deleted");
+                _IRole.Delete(id);
+                return Ok("Role Deleted");
             }
             catch (Exception e)
             {
@@ -101,4 +103,3 @@ namespace Tolling.Controllers
         }
     }
 }
-

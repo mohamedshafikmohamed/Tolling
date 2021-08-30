@@ -10,12 +10,13 @@ using Tolling.Models;
 
 namespace Tolling.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
-    public class ToolController : ControllerBase
+    //Tested
+    public class ToolsController : ControllerBase
     {
         private readonly ITool _ITool;
-        public ToolController(ITool ITool)
+        public ToolsController(ITool ITool)
         {
             _ITool = ITool;
         }

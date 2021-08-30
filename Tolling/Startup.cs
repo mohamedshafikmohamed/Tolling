@@ -34,12 +34,20 @@ namespace Tolling
             services.AddDbContext<Dbcontext>(item => item.UseSqlServer
            (Configuration.GetConnectionString("Tollingdb")));
             services.AddScoped<IUser, UserRepos>();
-            services.AddScoped<IActionType, ActionTypeRepos>();
             services.AddScoped<ILocation, LocationRepos>();
             services.AddScoped<IPart, PartRepos>();
             services.AddScoped<ITool, ToolRepos>();
             services.AddScoped<ILocker, LockerRepos>();
-            services.AddScoped<ITooling_Movement_Log, Tooling_Movement_LogRepos>();
+            services.AddScoped<IRole, RoleRepos>();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("_myAllowSpecificOrigins", builder =>
+builder.AllowAnyOrigin()
+.AllowAnyMethod()
+.AllowAnyHeader()
+);
+            });
+                services.AddScoped<ITooling_Movement_Log, Tooling_Movement_LogRepos>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Tolling", Version = "v1" });
@@ -55,13 +63,10 @@ namespace Tolling
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Tolling v1"));
             }
-
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseAuthorization();
-
+            app.UseCors("_myAllowSpecificOrigins");
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

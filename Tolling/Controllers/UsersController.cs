@@ -12,12 +12,13 @@ using Tolling.Models;
 namespace Tolling.Controllers
 {
     [SwaggerTag("ggg")]
-       [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    //Tested
+    public class UsersController : ControllerBase
     {
         private readonly IUser _Iuser;
-        public UserController(IUser Iuser)
+        public UsersController(IUser Iuser)
         {
             _Iuser = Iuser;
         }
@@ -94,6 +95,7 @@ namespace Tolling.Controllers
         {
             try
             {
+                user.Password = _Iuser.MD5Hash(user.Password);
                 _Iuser.Update(user);
                 return Ok("User Updated");
             }
@@ -117,5 +119,6 @@ namespace Tolling.Controllers
                 return BadRequest("Error : " + e.Message);
             }
         }
+      
     }
 }

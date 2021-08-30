@@ -17,12 +17,14 @@ namespace Tolling.Models
          public DateTime ActionTakenAt { get; set; }
         //[f]
         public string ActionName { get; set; }
-        public ActionType ActionType { get; set; }
+        
         public int UserId { get; set; }
+        [ForeignKey("UserId")]
         public User User { get; set; }
 
        [MaxLength(10, ErrorMessage = "SerialNumber can't be longer than 10 characters")]
-       [ForeignKey("SerialNumber")]
+        public string serialNumber { get; set; }
+        [ForeignKey("serialNumber")]
         public Tool Tool { get; set; }
         public int LocationId { get; set; }
         public Location Location { get; set; }

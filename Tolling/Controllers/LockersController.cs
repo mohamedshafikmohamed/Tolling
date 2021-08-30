@@ -9,23 +9,23 @@ using Tolling.Models;
 
 namespace Tolling.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
-    public class PartController : ControllerBase
+    //Tested
+    public class LockersController : ControllerBase
     {
-        // GET: api/<PartController>
-        private readonly IPart _IPart;
-        public PartController(IPart Ipart)
+        private readonly ILocker _ILocker;
+        public LockersController(ILocker Ilocker)
         {
-            _IPart = Ipart;
+            _ILocker = Ilocker;
         }
-        //GET: api/PartController
+        //GET: api/LockerController
         [HttpGet]
-        public ActionResult<IEnumerable<Part>> Get()
+        public ActionResult<IEnumerable<Tool>> Get()
         {
             try
             {
-                return Ok(_IPart.GetAll());
+                return Ok(_ILocker.GetAll());
             }
             catch (Exception e)
             {
@@ -33,13 +33,13 @@ namespace Tolling.Controllers
             }
         }
 
-        // GET api/PartController/5
+        // GET api/LockerController/5
         [HttpGet("{id}")]
-        public ActionResult<Part> Get(string id)
+        public ActionResult<User> Get(int id)
         {
             try
             {
-                return Ok(_IPart.GetOne(id));
+                return Ok(_ILocker.GetOne(id));
             }
             catch (Exception e)
             {
@@ -47,9 +47,9 @@ namespace Tolling.Controllers
             }
         }
 
-        // POST api/PartController
+        // POST api/ILockerController
         [HttpPost]
-        public ActionResult Post([FromBody] Part part)
+        public ActionResult Post([FromBody] LockerViewModel locker)
         {
             try
             {
@@ -57,7 +57,7 @@ namespace Tolling.Controllers
                 if (ModelState.IsValid)
                 {
 
-                    _IPart.Create(part);
+                    _ILocker.Create(locker.locker,locker.locationDetails);
                     return Ok("Item Created successfully");
 
                 }
@@ -71,13 +71,13 @@ namespace Tolling.Controllers
 
 
 
-        // PUT api/<PartController>/5
+        // PUT api/<LockerController>/5
         [HttpPut()]
-        public ActionResult Put([FromBody] Part part)
+        public ActionResult Put([FromBody] LockerViewModel locker)
         {
             try
             {
-                _IPart.Update(part);
+                _ILocker.Update(locker.locker,locker.locationDetails);
                 return Ok("Item Updated");
             }
             catch (Exception e)
@@ -86,13 +86,13 @@ namespace Tolling.Controllers
             }
         }
 
-        // DELETE api/<PartController>/5
+        // DELETE api/<LockerController>/5
         [HttpDelete("{id}")]
-        public ActionResult Delete(string id)
+        public ActionResult Delete(int id)
         {
             try
             {
-                _IPart.Delete(id);
+                _ILocker.Delete(id);
                 return Ok("Item Deleted");
             }
             catch (Exception e)
@@ -102,3 +102,4 @@ namespace Tolling.Controllers
         }
     }
 }
+

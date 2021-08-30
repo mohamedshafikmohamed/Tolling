@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Tolling.Data;
 
 namespace Tolling.Migrations
 {
     [DbContext(typeof(Dbcontext))]
-    partial class DbcontextModelSnapshot : ModelSnapshot
+    [Migration("20210829093345_editmodels12")]
+    partial class editmodels12
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -201,7 +203,7 @@ namespace Tolling.Migrations
                     b.Property<DateTime>("ActionTakenAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Action_Name")
+                    b.Property<string>("ActionTypeActionName")
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<int>("LocationId")
@@ -216,7 +218,7 @@ namespace Tolling.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Action_Name");
+                    b.HasIndex("ActionTypeActionName");
 
                     b.HasIndex("LocationId");
 
@@ -319,7 +321,7 @@ namespace Tolling.Migrations
                 {
                     b.HasOne("Tolling.Models.ActionType", "ActionType")
                         .WithMany()
-                        .HasForeignKey("Action_Name");
+                        .HasForeignKey("ActionTypeActionName");
 
                     b.HasOne("Tolling.Models.Location", "Location")
                         .WithMany()

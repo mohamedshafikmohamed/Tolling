@@ -6,7 +6,7 @@ using Tolling.Models;
 
 namespace Tolling.Interfaces
 {
- public   interface IActionType: Crud<ActionType, string>
+    public interface IRole : Crud<Role, string>
     {
     }
 }

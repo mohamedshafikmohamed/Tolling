@@ -15,11 +15,12 @@ namespace Tolling.Repository
         {
             _db = db;
         }
-        public void Create(Locker locker)
+        public void Create(Locker locker,LocationDetails locationdetails)
         {
            
             _db.Locker.Add(locker);
             _db.SaveChanges();
+            AssignMToM(locationdetails);
         }
 
         public void Delete(int id)
@@ -38,9 +39,16 @@ namespace Tolling.Repository
         {
             return _db.Locker.ToList();
         }
-        public void Update(Locker locker)
+        public void Update(Locker locker,LocationDetails locationDetails)
         {
             _db.Locker.Update(locker);
+            _db.SaveChanges();
+            _db.LocationDetails.Update(locationDetails);
+            _db.SaveChanges();
+        }
+        public void AssignMToM(LocationDetails locationdetails)
+        {
+            _db.LocationDetails.Add(locationdetails);
             _db.SaveChanges();
         }
     }

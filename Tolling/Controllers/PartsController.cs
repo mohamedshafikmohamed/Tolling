@@ -5,27 +5,28 @@ using System.Linq;
 using System.Threading.Tasks;
 using Tolling.Interfaces;
 using Tolling.Models;
-
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Tolling.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
-    public class LocationController : ControllerBase
+    //Tested
+    public class PartsController : ControllerBase
     {
-        private readonly ILocation _ILocation;
-        public LocationController(ILocation ILocation)
+        // GET: api/<PartController>
+        private readonly IPart _IPart;
+        public PartsController(IPart Ipart)
         {
-            _ILocation = ILocation;
+            _IPart = Ipart;
         }
-        //GET: api/LocationController
+        //GET: api/PartController
         [HttpGet]
-        public ActionResult<IEnumerable<Location>> Get()
+        public ActionResult<IEnumerable<Part>> Get()
         {
             try
             {
-                return Ok(_ILocation.GetAll());
+                return Ok(_IPart.GetAll());
             }
             catch (Exception e)
             {
@@ -33,13 +34,13 @@ namespace Tolling.Controllers
             }
         }
 
-        // GET api/ToolController/5
+        // GET api/PartController/5
         [HttpGet("{id}")]
-        public ActionResult<Location> Get(int id)
+        public ActionResult<Part> Get(string id)
         {
             try
             {
-                return Ok(_ILocation.GetOne(id));
+                return Ok(_IPart.GetOne(id));
             }
             catch (Exception e)
             {
@@ -47,9 +48,9 @@ namespace Tolling.Controllers
             }
         }
 
-        // POST api/LocationController
+        // POST api/PartController
         [HttpPost]
-        public ActionResult Post([FromBody] Location location)
+        public ActionResult Post([FromBody] PartViewModel model)
         {
             try
             {
@@ -57,8 +58,8 @@ namespace Tolling.Controllers
                 if (ModelState.IsValid)
                 {
 
-                    _ILocation.Create(location);
-                    return Ok("Location Created successfully");
+                    _IPart.Create(model.part,model.toolpart);
+                    return Ok("Item Created successfully");
 
                 }
                 else return BadRequest("Some properties are not valid");
@@ -71,14 +72,14 @@ namespace Tolling.Controllers
 
 
 
-        // PUT api/<LocationController>/5
+        // PUT api/<PartController>/5
         [HttpPut()]
-        public ActionResult Put([FromBody] Location location)
+        public ActionResult Put([FromBody] PartViewModel part)
         {
             try
             {
-                _ILocation.Update(location);
-                return Ok("Location Updated");
+                _IPart.Update(part.part,part.toolpart);
+                return Ok("Item Updated");
             }
             catch (Exception e)
             {
@@ -86,14 +87,14 @@ namespace Tolling.Controllers
             }
         }
 
-        // DELETE api/<LocationController>/5
+        // DELETE api/<PartController>/5
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string id)
         {
             try
             {
-                _ILocation.Delete(id);
-                return Ok("Location Deleted");
+                _IPart.Delete(id);
+                return Ok("Item Deleted");
             }
             catch (Exception e)
             {

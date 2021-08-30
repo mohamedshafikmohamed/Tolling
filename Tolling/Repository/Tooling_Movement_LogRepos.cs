@@ -17,7 +17,21 @@ namespace Tolling.Repository
         }
         public void Create(Tooling_Movement_Log Tooling_Movement_log)
         {
-           
+            var location = _db.Tooling_Movement_Log.Where(u => u.serialNumber == Tooling_Movement_log.serialNumber).OrderBy(l => l.Id).ToList();
+           if (location.Count==0) 
+            {
+                Tooling_Movement_log.ActionName = "Initialize At";
+            }
+           else if (Tooling_Movement_log.LocationId == location[0].LocationId)
+
+            {
+                Tooling_Movement_log.ActionName = "Transfer From";
+
+            }
+            else
+            {
+                Tooling_Movement_log.ActionName = "Recieved At";
+            }
             _db.Tooling_Movement_Log.Add(Tooling_Movement_log);
             _db.SaveChanges();
         }
