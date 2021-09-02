@@ -36,6 +36,7 @@ namespace Tolling
             services.AddScoped<IUser, UserRepos>();
             services.AddScoped<ILocation, LocationRepos>();
             services.AddScoped<IPart, PartRepos>();
+            services.AddScoped<ILocationDetails, LocationDetailsRepos>();
             services.AddScoped<ITool, ToolRepos>();
             services.AddScoped<ILocker, LockerRepos>();
             services.AddScoped<IRole, RoleRepos>();
