@@ -23,15 +23,15 @@ namespace Tolling.Repository
             
         }
 
-        public void Delete(string id)
-        {/*
-            var part = _db.Part.Find(id);
-            _db.Part.Remove(part);
+        public void Delete(int id)
+        {
+            var LocationDetails = _db.LocationDetails.Find(id);
+            _db.LocationDetails.Remove(LocationDetails);
             _db.SaveChanges();
-        */
+        
             }
 
-        public LocationDetails GetOne(string id)
+        public LocationDetails GetOne(int id)
         {
             return _db.LocationDetails.Find(id);
         }
@@ -41,11 +41,10 @@ namespace Tolling.Repository
             return _db.LocationDetails.ToList();
         }
         public void Update(LocationDetails part)
-        {/*
-            _db.Part.Update(part);
-            _db.ToolPart.Update(toolpart);
+        {
+            _db.LocationDetails.Update(part);
             _db.SaveChanges();
-        */
+        
             }
 
         

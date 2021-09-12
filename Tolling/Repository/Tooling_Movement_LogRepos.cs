@@ -17,6 +17,7 @@ namespace Tolling.Repository
         }
         public void Create(Tooling_Movement_Log Tooling_Movement_log)
         {
+            Tooling_Movement_log.ActionTakenAt = DateTime.Now;
             var location = _db.Tooling_Movement_Log.Where(u => u.serialNumber == Tooling_Movement_log.serialNumber).OrderBy(l => l.Id).ToList();
            if (location.Count==0) 
             {
@@ -26,6 +27,7 @@ namespace Tolling.Repository
 
             {
                 Tooling_Movement_log.ActionName = "Transfer From";
+
 
             }
             else

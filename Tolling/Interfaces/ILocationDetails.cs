@@ -6,7 +6,7 @@ using Tolling.Models;
 
 namespace Tolling.Interfaces
 {
-   public interface ILocationDetails:Crud<LocationDetails,string>
+   public interface ILocationDetails:Crud<LocationDetails,int>
     {
     }
 }

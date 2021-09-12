@@ -79,8 +79,11 @@ namespace Tolling.Controllers
         {
             try
             {
+                var p = signIn.Password;
                 signIn.Password = _Iuser.MD5Hash(signIn.Password);
-                return Ok(_Iuser.SignIn(signIn));
+                var user=_Iuser.SignIn(signIn);
+                if (user != null) user.Password = p;
+                return Ok(user);
             }
             catch (Exception e)
             {

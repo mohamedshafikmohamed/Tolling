@@ -32,24 +32,10 @@ namespace Tolling.Controllers
                 return BadRequest("Error : " + e.Message);
             }
         }
-        /*
-        // GET api/ToolController/5
-        [HttpGet("{id}")]
-        public ActionResult<Location> Get(int id)
-        {
-            try
-            {
-                return Ok(_ILocation.GetOne(id));
-            }
-            catch (Exception e)
-            {
-                return BadRequest("Error : " + e.Message);
-            }
-        }
-
-        // POST api/LocationController
+        
+ 
         [HttpPost]
-        public ActionResult Post([FromBody] Location location)
+        public ActionResult Post([FromBody] LocationDetails locationdetails)
         {
             try
             {
@@ -57,8 +43,8 @@ namespace Tolling.Controllers
                 if (ModelState.IsValid)
                 {
 
-                    _ILocation.Create(location);
-                    return Ok("Location Created successfully");
+                    _ILocationDetails.Create(locationdetails);
+                    return Ok("LocationDetails Created successfully");
 
                 }
                 else return BadRequest("Some properties are not valid");
@@ -73,12 +59,12 @@ namespace Tolling.Controllers
 
         // PUT api/<LocationController>/5
         [HttpPut()]
-        public ActionResult Put([FromBody] Location location)
+        public ActionResult Put([FromBody] LocationDetails location)
         {
             try
             {
-                _ILocation.Update(location);
-                return Ok("Location Updated");
+                _ILocationDetails.Update(location);
+                return Ok("Location  Updated");
             }
             catch (Exception e)
             {
@@ -92,7 +78,7 @@ namespace Tolling.Controllers
         {
             try
             {
-                _ILocation.Delete(id);
+                _ILocationDetails.Delete(id);
                 return Ok("Location Deleted");
             }
             catch (Exception e)
@@ -100,6 +86,6 @@ namespace Tolling.Controllers
                 return BadRequest("Error : " + e.Message);
             }
         }
-        */
+        
     }
 }
